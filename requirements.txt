@@ -1,0 +1,4 @@
+torch==2.8.0+cu128
+transformers==4.57.0
+vllm==0.11.0
+verl==0.7.0.dev
