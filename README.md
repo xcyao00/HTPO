@@ -160,6 +160,9 @@ If you find this work useful, please cite:
 ```bibtex
 @article{htpo2025yao,
   title     = {HTPO: Towards Exploration-Exploitation Balanced Policy Optimization via Hierarchical Token-level Objective Control},
-  year      = {2025},
+  author    = {Xincheng Yao and Ruoqi Li and Cheng Chen and Daoxin Zhang and Yi Wu and Yao Hu and Chongyang Zhang},
+  url       = {https://arxiv.org/abs/2605.08283},
+  primaryClass = {cs.AI},
+  year      = {2026},
 }
 ```
