@@ -1167,13 +1167,13 @@ def compute_policy_loss_htpo(
         identity_ratio = torch.exp(_log_prob - _log_prob.detach())
         if upper_cliprange_mask.sum() > 0:
             pg_clip_num += upper_cliprange_mask.sum()
-            pg_losses_group2_upper = (1 + cliprange_high) * identity_ratio * _advantages
+            pg_losses_group2_upper = -(1 + cliprange_high) * identity_ratio * _advantages
             pg_losses_group12[upper_cliprange_mask] = pg_losses_group2_upper[upper_cliprange_mask]
         lower_cliprange_mask = (_ratio < 1 - cliprange_low) & (high_entropy_mask)
         if lower_cliprange_mask.sum() > 0:
             pg_clip_num += lower_cliprange_mask.sum()
             reverse_ratio = torch.exp(old_log_prob[inds] - _log_prob.detach())
-            pg_losses_group2_lower = reverse_ratio * identity_ratio * _advantages
+            pg_losses_group2_lower = -reverse_ratio * identity_ratio * _advantages
             pg_losses_group12[lower_cliprange_mask] = pg_losses_group2_lower[lower_cliprange_mask]
         
         pg_losses_list.append(pg_losses_group12)
@@ -1201,7 +1201,7 @@ def compute_policy_loss_htpo(
         if lower_cliprange_mask.sum() > 0:
             pg_clip_num += lower_cliprange_mask.sum()
             identity_ratio = torch.exp(_log_prob - _log_prob.detach())
-            pg_losses_group4_lower = (1 - cliprange_low) * identity_ratio * _advantages
+            pg_losses_group4_lower = -(1 - cliprange_low) * identity_ratio * _advantages
             pg_losses_group34[lower_cliprange_mask] = pg_losses_group4_lower[lower_cliprange_mask]
         
         pg_losses_list.append(pg_losses_group34)
@@ -1257,7 +1257,7 @@ def compute_policy_loss_htpo(
         if lower_cliprange_mask.sum() > 0:
             pg_clip_num += lower_cliprange_mask.sum()
             identity_ratio = torch.exp(_log_prob - _log_prob.detach())
-            pg_losses_group8_lower = (1 - cliprange_low) * identity_ratio * _advantages
+            pg_losses_group8_lower = -(1 - cliprange_low) * identity_ratio * _advantages
             pg_losses_group78[lower_cliprange_mask] = pg_losses_group8_lower[lower_cliprange_mask]
         
         pg_losses_list.append(pg_losses_group78)
